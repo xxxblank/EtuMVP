@@ -1,4 +1,19 @@
 # EtuMVP
+仿照jude的Beam框架
+
+## 进度
+基本完成顶层activity、视图工具类viewHelper，顶层presenter，顶层presenter的构建类、管理类、
+相关的注解。
+已转移activity的生命周期到视图工具类、通过视图工具类绑定到presenter的生命周期。
+presenter和view层解耦，presenter持有view的弱引用，view通过反射和注解获取presenter，presenter
+由管理类进行统一管理，存放在一个map中，因此如果activity因为意外情况销毁重建，则presenter不需要重建，
+已经重写onsaveinstance方法，通过存储在内存中的map和onsaveinstance时存储的presenter的id取回存储
+在map中的presenter即可恢复意外销毁之前的数据
+
+目前v和p已经可以通过getPresenter和getView相互通信，且v的生命周期方法全部反映到了presenter中。
+
+## whatTODO
+model层与p层的通信和封装，前面代码的完善和测试
 
 ## 顶层activity类
 

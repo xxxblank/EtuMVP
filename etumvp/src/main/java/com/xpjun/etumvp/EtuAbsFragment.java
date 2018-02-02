@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 /**
  * Created by Rirsa on 2018/2/2.
+ * 顶层fragment类
  */
 
 public class EtuAbsFragment<PresenterType extends Presenter>

@@ -1,6 +1,10 @@
 package com.xpjun.etumvp;
 
+import android.content.Intent;
 import android.os.Bundle;
+
+import java.lang.ref.Reference;
+import java.lang.ref.WeakReference;
 
 /**
  * Created by Rirsa on 2018/2/2.
@@ -8,6 +12,8 @@ import android.os.Bundle;
  */
 
 public class Presenter<ViewType> {
+
+    private Reference<ViewType> viewRef;
 
     /*
     activity第一次创建的时候调用，之后直到退出都不会调用第二次
@@ -17,7 +23,13 @@ public class Presenter<ViewType> {
     /*
     activity的onCreate的回调，执行延迟到presenter的onCreate方法之后
      */
-    protected void onCreatedView(ViewType view){}
+    protected void onCreatedView(ViewType view){
+        viewRef = new WeakReference<ViewType>(view);
+    }
+
+    public ViewType getView(){
+        return viewRef.get();
+    }
 
     /*
     activity的onDestory的回调
@@ -34,4 +46,18 @@ public class Presenter<ViewType> {
     protected void onPause(){}
     protected void onStop(){}
 
+    protected String id;
+
+    public void create(ViewType view,Bundle saveInstance){
+        viewRef = new WeakReference<ViewType>(view);
+        onCreate(viewRef.get(),saveInstance);
+    }
+
+    public void onResult(int requestCode, int resultCode, Intent data) {
+
+    }
+
+    public void onSave(Bundle state){
+
+    }
 }

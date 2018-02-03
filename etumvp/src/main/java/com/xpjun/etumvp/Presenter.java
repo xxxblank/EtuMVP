@@ -48,7 +48,7 @@ public class Presenter<ViewType> {
 
     protected String id;
 
-    public void create(ViewType view,Bundle saveInstance){
+    public void bind(ViewType view,Bundle saveInstance){
         viewRef = new WeakReference<ViewType>(view);
         onCreate(viewRef.get(),saveInstance);
     }

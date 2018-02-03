@@ -27,6 +27,8 @@ public class ViewHelper<presenterType extends Presenter> {
      通过savedInstanceState判断activity是否为异常情况退出，
      如果是则从缓存中取出之前的presenter，不是则重新创建一个presenter
      并存入内存中
+     创建presenter后与对应视图绑定
+     presenter内持有的是view类的弱引用，不影响视图层回收
      */
     protected void onCreate(Bundle savedInstanceState) {
         String id;
@@ -37,7 +39,7 @@ public class ViewHelper<presenterType extends Presenter> {
             presenter = PresenterManager.getInstance().getPresenter(id);
             if (presenter == null) presenter = PresenterManager.getInstance().create(view);
         }
-        if (presenter!=null) presenter.create(view,savedInstanceState);
+        if (presenter!=null) presenter.bind(view,savedInstanceState);
     }
 
     /*

@@ -1,4 +1,4 @@
-package com.xpjun.etumvp;
+package com.xpjun.etumvp.toplayer;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -73,9 +73,14 @@ public class ViewHelper<presenterType extends Presenter> {
 
     public void onDestroy() {
         presenter.onDestory();
+        PresenterManager.getInstance().destory(presenter.id);
     }
 
     public void onResult(int requestCode, int resultCode, Intent data) {
         presenter.onResult(requestCode,resultCode,data);
+    }
+
+    public void onDestroyView() {
+        presenter.onDestoryView();
     }
 }

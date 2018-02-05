@@ -1,4 +1,4 @@
-package com.xpjun.etumvp;
+package com.xpjun.etumvp.toplayer;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;

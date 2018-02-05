@@ -1,4 +1,4 @@
-package com.xpjun.etumvp;
+package com.xpjun.etumvp.toplayer;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -39,7 +39,12 @@ public class Presenter<ViewType> {
     /*
     presenter销毁的回调，表示activity正式退出
      */
-    protected void onDestory(){}
+    protected void onDestory(){
+        if (viewRef!=null){
+            viewRef.clear();
+            viewRef = null;
+        }
+    }
 
     protected void onStart(){}
     protected void onResume(){}

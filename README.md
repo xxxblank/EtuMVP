@@ -1,12 +1,19 @@
 # EtuMVP
-仿照jude的Beam框架
+仿照jude的Beam框架，rxjava+MVP
 
 ## 进度
+
+更新
+在原有顶层view层和presenter层之上增加了一层和视图有关的封装，因为比较通用所以将这一层命名为base。
+p与model层的联系最终采用rx的方式，model层暂时没有进行多余的封装，而是在base的基础上封装了一层baseData，可以直接使用model类的方法返回Observable，在basedatapresenter中通过
+订阅getDataSubscriber所得到的订阅者的方式来将数据传到baseData层的activity或者fragment
+//
 更新
 测试了presenter和view的基本通信，presenter和view彼此可通过getView和getPresenter通信
 //
 基本完成顶层activity、视图工具类viewHelper，顶层presenter，顶层presenter的构建类、管理类、
 相关的注解。
+
 已转移activity的生命周期到视图工具类、通过视图工具类绑定到presenter的生命周期。
 presenter和view层解耦，presenter持有view的弱引用，view通过反射和注解获取presenter，presenter
 由管理类进行统一管理，存放在一个map中，因此如果activity因为意外情况销毁重建，则presenter不需要重建，
@@ -17,6 +24,9 @@ presenter和view层解耦，presenter持有view的弱引用，view通过反射�
 目前v和p已经可以通过getPresenter和getView相互通信，且v的生命周期方法全部反映到了presenter中。
 
 ## whatTODO
+更新
+考虑在base上增加封装一层和basedata并列的baselist层，添加和列表相关的通用数据逻辑
+//
 更新
 使用rxjava的观察者模式完成model与presenter层的通信
 需在presenter层编写可能需要的subscriber
@@ -45,3 +55,7 @@ model层与p层的通信和封装，前面代码的完善和测试
 ## 公用base类
 
 底层之上的第二层封装，底层封装的是完全的逻辑，这一层可以封装一些视图上的共性，也可以不用这一层
+
+## baseData相关类
+
+以base层为基础的第三层封装，底层封装生命周期和通用逻辑，base层封装视图相关的通用逻辑，本层封装的是与数据订阅相关的逻辑
